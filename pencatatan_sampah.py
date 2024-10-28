@@ -158,7 +158,7 @@ def menu():
         
         if pilihan == '1':
             try:
-                jenis = input("Masukkan jenis sampah: ")
+                jenis = input("Masukkan jenis sampah:  ")
                 berat = float(input("Masukkan berat sampah (kg): "))
                 status = input("Masukkan status sampah (misal: bersih, kotor): ")
                 catat_sampah(jenis, berat, status)
