@@ -1,7 +1,6 @@
 Tanggal,Jenis Sampah,Berat (kg),Status
-2024-10-24 11:33:56,botol,1.0,bersih
-2024-10-24 13:10:15,botol,2.0,bersih
-2024-10-24 13:14:57,plastik,2.4,kotor
-2024-10-24 16:29:29,djerigen,10.0,bersih
-2024-10-26 01:08:52,botol,24.0,bersih
-2024-10-26 01:29:14,KALENG,10.0,kotor
+2024-10-28 10:25:54,kaleng,1.0,bersih
+2024-10-28 10:26:04,kaleng,2.0,bersih
+2024-10-28 10:26:25,kaleng,0.5,kotor
+2024-10-28 10:30:24,botol plastik,1.0,bersih
+2024-10-28 10:31:50,tutup botol,0.5,bersih

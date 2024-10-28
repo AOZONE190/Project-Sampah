@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime, timedelta
 import os
-import matplotlib.pyplot as plt  # Tambahkan ini untuk grafik
+import matplotlib.pyplot as plt
 
 # Fungsi untuk mencatat data sampah
 def catat_sampah(jenis_sampah, berat_sampah, status_sampah):
@@ -21,6 +21,7 @@ def catat_sampah(jenis_sampah, berat_sampah, status_sampah):
 def lihat_laporan_harian():
     today = datetime.now().strftime('%Y-%m-%d')
     total_berat = 0
+    jenis_sampah_count = {}
     print(f"Laporan Sampah Harian - {today}:")
     
     try:
@@ -34,6 +35,10 @@ def lihat_laporan_harian():
                 if today in tanggal:
                     print(f"Waktu: {tanggal}, Jenis: {jenis}, Berat: {berat} kg, Status: {status}")
                     total_berat += float(berat)
+                    if jenis in jenis_sampah_count:
+                        jenis_sampah_count[jenis] += float(berat)
+                    else:
+                        jenis_sampah_count[jenis] = float(berat)
     except FileNotFoundError:
         print("File 'data_sampah.csv' tidak ditemukan.")
     except Exception as e:
@@ -41,12 +46,14 @@ def lihat_laporan_harian():
 
     print(f"Total sampah hari ini: {total_berat:.2f} kg")
     buat_grafik_harian(today)
+    buat_pie_chart(jenis_sampah_count)
 
 # Fungsi untuk melihat laporan mingguan
 def lihat_laporan_mingguan():
     today = datetime.now()
     start_of_week = today - timedelta(days=today.weekday())
     total_berat = 0
+    jenis_sampah_count = {}
     
     print(f"Laporan Sampah Mingguan - {start_of_week.strftime('%Y-%m-%d')} sampai {today.strftime('%Y-%m-%d')}:")
     
@@ -62,6 +69,10 @@ def lihat_laporan_mingguan():
                 if start_of_week <= tanggal_obj <= today:
                     print(f"Waktu: {tanggal}, Jenis: {jenis}, Berat: {berat} kg, Status: {status}")
                     total_berat += float(berat)
+                    if jenis in jenis_sampah_count:
+                        jenis_sampah_count[jenis] += float(berat)
+                    else:
+                        jenis_sampah_count[jenis] = float(berat)
     except FileNotFoundError:
         print("File 'data_sampah.csv' tidak ditemukan.")
     except Exception as e:
@@ -69,6 +80,7 @@ def lihat_laporan_mingguan():
 
     print(f"Total sampah minggu ini: {total_berat:.2f} kg")
     buat_grafik_mingguan(start_of_week, today)
+    buat_pie_chart(jenis_sampah_count)
 
 # Fungsi untuk membuat grafik harian
 def buat_grafik_harian(today):
@@ -132,6 +144,16 @@ def buat_grafik_mingguan(start_of_week, today):
 
     except FileNotFoundError:
         print("File 'data_sampah.csv' tidak ditemukan.")
+
+# Fungsi untuk membuat pie chart jenis sampah
+def buat_pie_chart(jenis_sampah_count):
+    labels = list(jenis_sampah_count.keys())
+    sizes = list(jenis_sampah_count.values())
+    
+    plt.figure(figsize=(6, 6))
+    plt.pie(sizes, labels=labels, autopct='%1.1fclear%%', startangle=140)
+    plt.title('Persentase Jenis Sampah')
+    plt.show()
 
 # hapus data
 def hapus_data():
