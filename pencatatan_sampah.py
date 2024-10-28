@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 
 # Fungsi untuk mencatat data sampah
 def catat_sampah(jenis_sampah, berat_sampah, status_sampah):
+    jenis_sampah_valid = ["botol", "tutup botol", "kaleng", "botol kaca"]
+    while jenis_sampah not in jenis_sampah_valid:
+        print("Jenis sampah tidak valid!",)
+        jenis_sampah = input("Masukkan jenis sampah: ")
     waktu_sekarang = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     data = [waktu_sekarang, jenis_sampah, berat_sampah, status_sampah]
     
